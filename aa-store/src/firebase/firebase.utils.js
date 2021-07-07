@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 
 import 'firebase/firestore';
 import 'firebase/auth';
+// import { CacheFirst } from "workbox-strategies";
 
 const config = {
     apiKey: "AIzaSyD78tXltNXFhkjn-nmIHMQyScm37BTf28Q",
@@ -13,6 +14,32 @@ const config = {
   };
 
   firebase.initializeApp(config);
+
+  export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    const snapShot = await userRef.get();
+
+    if(!snapShot.exists) {
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
+
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData
+        })
+      } catch(error) {
+        console.log('error creating user', error.message);
+      }
+    }
+  };
+
+  
 
   export const auth = firebase.auth();
   export const firestore  = firebase.firestore();
