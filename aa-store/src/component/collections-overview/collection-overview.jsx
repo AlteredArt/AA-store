@@ -1,5 +1,5 @@
 import React from 'react';
-import './collection-preview.scss';
+import './collection-overview.scss';
 import { createStructuredSelector } from 'reselect';
 import {connect} from 'react-redux';
 import CollectionPreview from '../collection-preview/collection-preview';
