@@ -12,6 +12,11 @@ import {selectCurrentUser} from './redux/user/user.selectors';
 import {createStructuredSelector} from 'reselect';
 import CheckoutPage from './page/checkout/checkout';
 
+const ExampleCSS = styled.div`
+  color: red;
+  font-size: 2rem;
+  border: ${({isActive}) => isActive ? '1xp solid black' : '3px dotted green'}
+`;
 
 class App extends React.Component {
   unsubscribeFromAuth = null
