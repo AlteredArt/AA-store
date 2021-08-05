@@ -23,15 +23,9 @@ export const OptionsContainer = styled.div `
     justify-content: flex-end;
 `;
 
-export const OptionsContainerStyles =css`
+
+export const OptionLink = styled(Link)`
     padding: 10px 15px;
     cursor: pointer;
 `;
 
-export const OptionLink = styled(Link)`
-    ${OptionContainerStyles}
-`;
-
-export const OptionDiv = styled.div`
-    ${OptionContainerStyles}
-`;
