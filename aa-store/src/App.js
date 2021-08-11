@@ -6,11 +6,12 @@ import HomePage from './page/homepage/homepage.component';
 import ShopPage from './page/shop/shop';
 import Header from './component/header/header';
 import EntryPage from './page/entry/entry';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, addCollectionsAndDocuments } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import {selectCurrentUser} from './redux/user/user.selectors';
 import {createStructuredSelector} from 'reselect';
 import CheckoutPage from './page/checkout/checkout';
+import { selectCollectionForPreview } from './redux/shop/shop.selectors';
 
 const ExampleCSS = styled.div`
   color: red;
@@ -23,7 +24,7 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    const {setCurrentUser} = this.props;
+    const {setCurrentUser, collectionsArray} = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -37,6 +38,7 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+      addCollectionsAndDocuments('collections', collectionsArray);
     });
   }
 
@@ -70,7 +72,9 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionForPreview
+
 });  
 
 const mapDispatchToProps = dispatch => ({
