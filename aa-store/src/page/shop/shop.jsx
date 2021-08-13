@@ -12,6 +12,7 @@ class ShopPage extends React.component {
 
     collectionRef.onSnapshot(async snapshot =>)
   }
+  // fix this
 
   render() {
 
