@@ -5,11 +5,11 @@ import CollectionPage from '../collection/collection';
 import {firestore} from '../../firebase/firebase.utils'
 
 class ShopPage extends React.component {
+
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
     const collectionRef = firestore.collection('collections');
-
     collectionRef.onSnapshot(async snapshot =>)
   }
   // fix this
