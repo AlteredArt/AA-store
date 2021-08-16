@@ -19,8 +19,11 @@ const config = {
     if (!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const collectionRef = firestore.collection('user');
 
     const snapShot = await userRef.get();
+    const collectionSnapShot = await collectionRef.get();
+    console.log({collectionSnapShot});
 
     if(!snapShot.exists) {
       const { displayName, email } = userAuth;
@@ -46,11 +49,9 @@ const config = {
     console.log(collectionRef)
   }
 
-  
 
   export const auth = firebase.auth();
   export const firestore  = firebase.firestore();
-
   const provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({prompt: 'select_account'});
   export const signInWithGoogle = () => auth.signInWithPopup(provider);
